@@ -42,4 +42,11 @@
     Required when both servlet-mapping is '/' and static resources need to be served -->
 	<mvc:default-servlet-handler />
 
+		<!--
+        - Message source for this context, loaded from localized "messages_xx" files.
+        - Files are stored inside src/main/resources
+    -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames" value="messages/messages" />
+	</bean>
 </beans>
