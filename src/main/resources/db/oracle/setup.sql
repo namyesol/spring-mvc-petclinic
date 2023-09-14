@@ -1,0 +1,2 @@
+CREATE USER petclinic IDENTIFIED BY petclinic;
+GRANT CONNECT, RESOURCE, DBA TO petclinic;
