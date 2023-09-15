@@ -7,6 +7,10 @@
     </settings>
 
 	<typeAliases>
+		<typeAlias alias="Owner" type="com.namyesol.domain.Owner"/>
+		<typeAlias alias="Pet" type="com.namyesol.domain.Pet"/>
+		<typeAlias alias="Visit" type="com.namyesol.domain.Visit"/>
+		<typeAlias alias="Vet" type="com.namyesol.domain.Vet"/>
     </typeAliases>
 
 </configuration>
