@@ -29,8 +29,17 @@
 
 	<context:component-scan base-package="com.namyesol.petclinic.controller" />
 
-	<mvc:annotation-driven validator="validator" />
+	<mvc:annotation-driven validator="validator" conversion-service="conversionService"/>
+	
 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+	
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean" >
+		<property name="formatters">
+			<set>
+				<bean class="com.namyesol.petclinic.controller.PetTypeFormatter" />
+			</set>
+		</property>
+	</bean>
 	
 	<mvc:view-controller path="/" view-name="welcome" />
 	
@@ -42,7 +51,7 @@
     Required when both servlet-mapping is '/' and static resources need to be served -->
 	<mvc:default-servlet-handler />
 
-		<!--
+	<!--
         - Message source for this context, loaded from localized "messages_xx" files.
         - Files are stored inside src/main/resources
     -->
