@@ -3,10 +3,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:oxm="http://www.springframework.org/schema/oxm"
 	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
                         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-                        http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+                        http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+                        http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm.xsd">
 
 	<!-- 
 	- The ContentNegotiatingViewResolver delegates to the InternalResourceViewResolver, and BeanNameViewResolver,
@@ -26,6 +28,16 @@
 		<mvc:bean-name/>
 		<mvc:jsp prefix="/WEB-INF/jsp/" suffix=".jsp" />
 	</mvc:view-resolvers>
+	
+    <!-- Renders an XML view. Used by the BeanNameViewResolver  -->
+    <bean id="vets/vetList.xml" class="org.springframework.web.servlet.view.xml.MarshallingView">
+        <property name="marshaller" ref="marshaller"/>
+    </bean>
+    
+    <oxm:jaxb2-marshaller id="marshaller">
+        <!-- Object-XML mapping declared using annotations inside 'Vets' -->
+        <oxm:class-to-be-bound name="org.springframework.samples.petclinic.model.Vets"/>
+    </oxm:jaxb2-marshaller>
 
 	<context:component-scan base-package="com.namyesol.petclinic.controller" />
 
