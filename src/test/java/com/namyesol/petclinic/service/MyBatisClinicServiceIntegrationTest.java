@@ -6,7 +6,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath:application-context.xml"})
+@ContextConfiguration({"file:src/main/webapp/WEB-INF/application-context.xml"})
 @ActiveProfiles("mybatis")
 public class MyBatisClinicServiceIntegrationTest extends AbstractClinicServiceIntegrationTest {
 

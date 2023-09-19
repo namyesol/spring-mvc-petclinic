@@ -101,6 +101,9 @@ abstract class AbstractClinicServiceIntegrationTest {
         owner6.addPet(pet);
         assertThat(owner6.getPets()).hasSize(found + 1);
         
+        clinicService.savePet(pet);
+        clinicService.saveOwner(owner6);
+        
         owner6 = clinicService.findOwnerById(6);
         assertThat(owner6.getPets()).hasSize(found + 1);
         assertThat(pet.getId()).isNotNull();
@@ -121,7 +124,7 @@ abstract class AbstractClinicServiceIntegrationTest {
 	}
 	
 	@Test
-    void shouldFindVets() {
+    public void shouldFindVets() {
         Collection<Vet> vets = this.clinicService.findVets();
 
         Vet vet = vets.stream().filter(v -> v.getId().equals(3)).findAny().get();
@@ -150,7 +153,7 @@ abstract class AbstractClinicServiceIntegrationTest {
 	}
 	
 	@Test
-	void shouldFindVisitsByPetId() throws Exception {
+	public void shouldFindVisitsByPetId() throws Exception {
 		Collection<Visit> visits = clinicService.findVisitsByPetId(7);
 		assertThat(visits).hasSize(2);
 		Visit[] visitArr = visits.toArray(new Visit[visits.size()]);

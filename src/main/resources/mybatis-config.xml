@@ -4,13 +4,20 @@
     
     <settings>
         <setting name="mapUnderscoreToCamelCase" value="true" />
+        <setting name="jdbcTypeForNull" value="NULL" />
+        <setting name="callSettersOnNulls" value="true"/>
     </settings>
 
 	<typeAliases>
-		<typeAlias alias="Owner" type="com.namyesol.domain.Owner"/>
-		<typeAlias alias="Pet" type="com.namyesol.domain.Pet"/>
-		<typeAlias alias="Visit" type="com.namyesol.domain.Visit"/>
-		<typeAlias alias="Vet" type="com.namyesol.domain.Vet"/>
+		<typeAlias alias="Owner" type="com.namyesol.petclinic.domain.Owner"/>
+		<typeAlias alias="Pet" type="com.namyesol.petclinic.domain.Pet"/>
+		<typeAlias alias="PetType" type="com.namyesol.petclinic.domain.PetType"/>
+		<typeAlias alias="Visit" type="com.namyesol.petclinic.domain.Visit"/>
+		<typeAlias alias="Vet" type="com.namyesol.petclinic.domain.Vet"/>
+		<typeAlias alias="Specialty" type="com.namyesol.petclinic.domain.Specialty"/>
     </typeAliases>
 
+	<typeHandlers>
+		<typeHandler javaType="java.time.LocalDate" handler="com.namyesol.petclinic.repository.mybatis.type.LocalDateTypeHandler"/>
+	</typeHandlers>
 </configuration>

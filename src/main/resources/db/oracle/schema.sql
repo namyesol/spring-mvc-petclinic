@@ -7,7 +7,7 @@ CREATE TABLE vets (
 
 CREATE INDEX idx_vets_last_name ON vets (last_name);
 
-CREATE SEQUENCE vets_id_seq;
+CREATE SEQUENCE vets_id_seq START WITH 100;
 
 CREATE TABLE specialties (
 	id INTEGER,
@@ -17,14 +17,14 @@ CREATE TABLE specialties (
 
 CREATE INDEX idx_specialties_name ON specialties (name);
 
-CREATE SEQUENCE specialties_id_seq;
+CREATE SEQUENCE specialties_id_seq START WITH 100;
 
 CREATE TABLE vet_specialties (
 	vet_id INTEGER NOT NULL,
-	speciality_id INTEGER NOT NULL,
+	specialty_id INTEGER NOT NULL,
 	FOREIGN KEY (vet_id) REFERENCES vets(id),
-	FOREIGN KEY (speciality_id) REFERENCES specialties(id),
-	CONSTRAINT unique_ids UNIQUE (vet_id, speciality_id)
+	FOREIGN KEY (specialty_id) REFERENCES specialties(id),
+	CONSTRAINT unique_ids UNIQUE (vet_id, specialty_id)
 );
 
 CREATE TABLE types (
@@ -35,7 +35,7 @@ CREATE TABLE types (
 
 CREATE INDEX idx_types_name ON types (name);
 
-CREATE SEQUENCE types_id_seq;
+CREATE SEQUENCE types_id_seq START WITH 100;
 
 CREATE TABLE owners (
 	id INTEGER,
@@ -46,6 +46,10 @@ CREATE TABLE owners (
 	telephone VARCHAR(20),
 	CONSTRAINT pk_owners PRIMARY KEY (id)
 );
+
+CREATE INDEX idx_owners_last_name ON owners (last_name);
+
+CREATE SEQUENCE owners_id_seq START WITH 100;
 
 CREATE TABLE pets (
 	id INTEGER,
@@ -60,7 +64,7 @@ CREATE TABLE pets (
 
 CREATE INDEX idx_pets_name ON pets (name);
 
-CREATE SEQUENCE pets_id_seq;
+CREATE SEQUENCE pets_id_seq START WITH 100;
 
 CREATE TABLE visits (
 	id INTEGER,
@@ -71,4 +75,4 @@ CREATE TABLE visits (
 	CONSTRAINT pk_visits PRIMARY KEY (id)
 );
 
-CREATE SEQUENCE visits_id_seq;
+CREATE SEQUENCE visits_id_seq START WITH 100;

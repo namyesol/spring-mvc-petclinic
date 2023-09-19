@@ -2,4 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.namyesol.petclinic.repository.mybatis.mapper.VisitMapper">
 
+	<insert id="insertVisit" parameterType="Visit">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+		    SELECT visits_id_seq.nextval FROM DUAL
+		</selectKey>
+		INSERT INTO visits (id, visit_date, description, pet_id)
+		VALUES (#{id}, #{date}, #{description}, #{pet.id})
+	</insert>
+	
+	<select id="findVisitsByPetId">
+		SELECT 
+			id
+			visit_date,
+			description 
+		FROM visits 
+		WHERE pet_id = #{petId}
+	</select>
 </mapper>

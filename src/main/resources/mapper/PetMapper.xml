@@ -1,5 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.namyesol.petclinic.repository.mybatis.mapper.PetMapper">
-
+	
+	<resultMap id="PetWithVisit" type="Pet">
+		<id property="id" column="pet_id"/>
+		<result property="name" column="pet_name"/>
+		<result property="birthDate" column="pet_birth_date"/>
+		<association property="type" javaType="PetType">
+			<id	property="id" column="type_id"/>
+			<result property="name" column="type_name"/>
+		</association>
+		<collection property="visitsInternal" notNullColumn="visit_id" javaType="java.util.HashSet" ofType="Visit">
+			<id property="id" column="visit_id"/>
+			<result property="date" column="visit_date"/>
+			<result property="description" column="visit_description"/>
+		</collection>
+	</resultMap>
+	
+	<select id="findPetTypes" resultType="PetType">
+		SELECT id, name
+		FROM types
+		ORDER BY name
+	</select>
+	
+	<insert id="insertPet" parameterType="Pet">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+			SELECT pets_id_seq.nextval FROM DUAL
+		</selectKey>
+		INSERT INTO pets (id, name, birth_date, type_id, owner_id)
+		VALUES (#{id}, #{name}, #{birthDate}, #{type.id}, #{owner.id})
+	</insert>
+	
+	<select id="findPetsByOwnerId" resultMap="PetWithVisit">
+		SELECT
+			P.id			as pet_id,
+			P.name			as pet_name,
+			P.birth_date	as pet_birth_date,	 
+		  	P.owner_id		as pet_owner_id,
+			V.id 			as visit_id,
+			V.visit_date	as visit_date, 
+			V.description	as visit_description, 
+			V.pet_id		as visit_pet_id,
+			T.id			as type_id,
+			T.name			as type_name
+	    FROM pets P 
+	    	LEFT OUTER JOIN visits V ON P.id = V.pet_id
+	    	LEFT OUTER JOIN types T ON P.type_id = T.id
+    	WHERE owner_id = #{ownerId}
+    	ORDER BY pet_id
+	</select>
+	
+	<update id="updatePet" >
+		UPDATE pets
+		SET
+			name = #{name},
+			birth_date = #{birthDate},
+			type_id = #{type.id},
+			owner_id = #{owner.id}
+		WHERE id = #{id}
+	</update>
+	
+	<select id="findOwnerIdByPetId">
+		SELECT owner_id FROM pets WHERE id = #{id}
+	</select>
+	
+	<select id="findPetById">
+		SELECT id, name, birth_date, type_id, owner_id 
+		FROM pets
+		WHERE id= #{id}
+	</select>
 </mapper>

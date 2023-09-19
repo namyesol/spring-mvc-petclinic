@@ -2,4 +2,38 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.namyesol.petclinic.repository.mybatis.mapper.OwnerMapper">
 
+	<insert id="insertOwner" parameterType="Owner">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+			SELECT owners_id_seq.nextval FROM DUAL
+		</selectKey>
+		
+		INSERT INTO owners
+			(id, first_name, last_name, address, city, telephone)
+		VALUES
+			(#{id}, #{firstName}, #{lastName}, #{address}, #{city}, #{telephone})
+	</insert>
+
+	<select id="findOwnerById" parameterType="java.lang.Integer" resultType="Owner">
+		SELECT id, first_name, last_name, address, city, telephone
+		FROM owners
+		WHERE id = #{id}
+	</select>
+	
+	<select id="findOwnersByLastName" resultType="Owner">
+		SELECT id, first_name, last_name, address, city, telephone
+		FROM owners
+		WHERE last_name LIKE #{lastName}
+	</select>
+	
+	<update id="updateOwner" parameterType="Owner">
+		UPDATE owners
+		SET
+			first_name = #{firstName},
+			last_name = #{lastName},
+			address= #{address},
+			city = #{city},
+			telephone = #{telephone}
+		WHERE id = #{id}
+	</update>
+	
 </mapper>

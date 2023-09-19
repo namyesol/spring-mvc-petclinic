@@ -2,4 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.namyesol.petclinic.repository.mybatis.mapper.VetMapper">
     
+    <resultMap id="vetResultMap" type="Vet">
+    	<id property ="id" column="vet_id"/>
+    	<result property="firstName" column="vet_first_name"/>
+    	<result property="lastName" column = "vet_last_name"/>
+    	<collection property="specialtiesInternal" notNullColumn="specialty_id" javaType="java.util.HashMap" ofType="Specialty">
+    		<id property="id" column="specialty_id"/>
+    		<result property="name" column="specialty_name"/>
+    	</collection>
+    </resultMap>
+    
+    <select id="findAll" resultMap="vetResultMap">
+    	SELECT
+    	V.id			as vet_id,
+    	V.first_name	as vet_first_name,
+    	V.last_name		as vet_last_name,
+    	S.id			as specialty_id,
+    	S.name			as specialty_name
+    	FROM vets V
+    		LEFT OUTER JOIN vet_specialties VS ON V.id = VS.vet_id
+    		LEFT OUTER JOIN specialties S ON VS.specialty_id = S.id
+    	ORDER BY last_name, first_name
+    </select>
 </mapper>
