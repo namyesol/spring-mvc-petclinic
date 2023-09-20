@@ -70,4 +70,16 @@
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
 		<property name="basenames" value="messages/messages" />
 	</bean>
+	
+    <!--
+        - This bean resolves specific types of exceptions to corresponding logical
+        - view names for error views.
+    -->
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <!-- view name resolved using bean of type InternalResourceViewResolver-->
+        <property name="defaultErrorView" value="exception"/>
+        <!-- results into 'WEB-INF/jsp/exception.jsp' -->
+        <property name="warnLogCategory" value="warn"/>
+        <!-- needed otherwise exceptions won't be logged anywhere -->
+    </bean>
 </beans>
