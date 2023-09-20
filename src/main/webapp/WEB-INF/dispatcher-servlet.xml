@@ -30,13 +30,13 @@
 	</mvc:view-resolvers>
 	
     <!-- Renders an XML view. Used by the BeanNameViewResolver  -->
-    <bean id="vets/vetList.xml" class="org.springframework.web.servlet.view.xml.MarshallingView">
+   <bean id="vets/vetList.xml" class="org.springframework.web.servlet.view.xml.MarshallingView">
         <property name="marshaller" ref="marshaller"/>
     </bean>
-    
+
+    <!-- Object-XML mapping declared using annotations inside 'Vets' -->
     <oxm:jaxb2-marshaller id="marshaller">
-        <!-- Object-XML mapping declared using annotations inside 'Vets' -->
-        <oxm:class-to-be-bound name="org.springframework.samples.petclinic.model.Vets"/>
+        <oxm:class-to-be-bound name="com.namyesol.petclinic.domain.Vets"/>
     </oxm:jaxb2-marshaller>
 
 	<context:component-scan base-package="com.namyesol.petclinic.controller" />

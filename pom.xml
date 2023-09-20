@@ -30,7 +30,9 @@
 		<el-api.version>3.0.0</el-api.version>
 		<javax-jstl.version>1.2</javax-jstl.version>
 		<javax-el.version>3.0.1-b12</javax-el.version>
-
+		<jaxb-api.version>2.3.1</jaxb-api.version>
+        <jaxb-runtime.version>2.3.4</jaxb-runtime.version>
+        <javax-activation.version>1.2.0</javax-activation.version>
 		<!-- Persistence -->
 		<mybatis.version>3.5.13</mybatis.version>
 		<mybatis-spring.version>2.1.1</mybatis-spring.version>
@@ -99,6 +101,11 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
+			<version>${spring-framework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-oxm</artifactId>
 			<version>${spring-framework.version}</version>
 		</dependency>
 
@@ -234,6 +241,26 @@
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
+
+
+        <!-- JAXB and Activation added for Java 9 compatibility.
+             The JAXB API is considered to be Java EE API and therefore is
+             no longer contained on the default class path in Java SE 9 -->
+			 <dependency>
+				<groupId>javax.xml.bind</groupId>
+				<artifactId>jaxb-api</artifactId>
+				<version>${jaxb-api.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.glassfish.jaxb</groupId>
+				<artifactId>jaxb-runtime</artifactId>
+				<version>${jaxb-runtime.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.activation</groupId>
+				<artifactId>javax.activation-api</artifactId>
+				<version>${javax-activation.version}</version>
+			</dependency>
 		
 	</dependencies>
 
