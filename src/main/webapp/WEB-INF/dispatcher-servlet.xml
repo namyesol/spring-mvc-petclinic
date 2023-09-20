@@ -59,6 +59,9 @@
  		(see htmlHeader.jsp for more details) -->
     <mvc:resources mapping="/resources/**" location="/resources/"/>
 	
+	<!-- uses WebJars so Javascript and CSS libs can be declared as Maven dependencies (Bootstrap, jQuery...) -->
+    <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
+	
 	<!-- serve static resources (*.html, ...) from src/main/webapp/
     Required when both servlet-mapping is '/' and static resources need to be served -->
 	<mvc:default-servlet-handler />
