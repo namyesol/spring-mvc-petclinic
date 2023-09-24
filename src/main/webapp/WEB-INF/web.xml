@@ -10,7 +10,7 @@
     </context-param>
     <context-param>
     	<param-name>spring.profiles.active</param-name>
-       	<param-value>mybatis</param-value>
+       	<param-value>jdbc</param-value>
     </context-param>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
