@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.namyesol.petclinic.domain.Specialty;
 import com.namyesol.petclinic.domain.Vet;
 
 @Mapper
